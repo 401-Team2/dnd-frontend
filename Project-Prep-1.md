@@ -88,7 +88,7 @@ We will work together to create a list of tasks, and identify any other tasks we
 
 GitHub, Trello and Discord. We will keep in touch and communicate as much as possible.  
 
-# Presentation Deck  
+## Presentation Deck  
 
 link: https://docs.google.com/presentation/d/1VfAWW_M49Hm1IsfPMnP2_fZVmnKbmE4A0tibbWtuOO8/edit?usp=sharing  
 
