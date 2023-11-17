@@ -1,111 +1,88 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Button, Alert } from 'react-native';
 import axios from 'axios';
-// import OptionList from 'src/components/OptionList.js';
-// import UserInfo from '../components/UserInfo';
-import { fetchInitialData } from '../utils/api';
+import Config from 'react-native-config';
+
+const serverUrl = Config.SERVER_URL;
 
 const MainScreen = () => {
   const [data, setData] = useState(null);
   const [userChoice, setUserChoice] = useState(null);
 
-  useEffect(() => {
-    fetchInitialData().then(setData);
-  }, []);
-
-  const populateFormWithData = (responseData) => {
-    setData(responseData);
-  };
-
+  // Function to fetch initial data from the server
   const fetchInitialData = async () => {
     try {
-      // Make a POST request using Axios
-      const response = await axios.post(`${SERVER_URL}/adventure`);
-      const responseData = response.data;
-      console.log("HERE'S THE RESPONSE ", response);
-
-      // Populate the form with the initial response
-      populateFormWithData(responseData);
+      const response = await axios.post(`${serverUrl}/adventure`);
+      setData(response.data);
     } catch (error) {
       console.error('Error:', error);
+      Alert.alert("Error", "Failed to fetch data from the server.");
     }
   };
 
-  const handleUserChoice = async (event) => {
-    event.preventDefault();
+  // Effect to load data on component mount
+  useEffect(() => {
+    fetchInitialData();
+  }, []);
+
+  // Function to handle user choice submission
+  const handleUserChoice = async () => {
     if (userChoice !== null && data !== null) {
-      const response = await axios.post(`${SERVER_URL}/adventure`, {
-        ...data,
-        userChoice,
-      });
-      const updatedData = response.data;
-      populateFormWithData(updatedData);
+      try {
+        const response = await axios.post(`${serverUrl}/adventure`, {
+          ...data,
+          userChoice,
+        });
+        setData(response.data);
+      } catch (error) {
+        console.error('Error:', error);
+        Alert.alert("Error", "Failed to submit user choice.");
+      }
     }
   };
 
+  // Function to render user choices as buttons
   const renderOptions = () => {
-    if (data && !data.deathScene) {
+    if (data?.options) {
       return data.options.map((option, index) => (
-        <View style={styles.container} key={index}>
-          <TextInput
-            type='radio'
-            name='userChoice'
-            value={index}
-            id={`option${index}`}
-            onChange={(e) => setUserChoice(option)}
-            checked={userChoice === option}
-          />
-          <Text htmlFor={`option${index}`}>{option}</Text>
-        </View>
+        <TouchableOpacity
+          key={index}
+          style={styles.button}
+          onPress={() => setUserChoice(option)}
+        >
+          <Text style={styles.buttonText}>{option}</Text>
+        </TouchableOpacity>
       ));
-    } else {
-      return null;
     }
+    return null;
   };
 
   return (
-  //     <View style={styles.container}>
-  //       <Text style={styles.title}>Quest Forge</Text>
-  //       {data && data.user && <UserInfo user={data.user} />}
-  //     </View>
-  // );
-  <View style={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.header}>Quest Forge</Text>
       <View style={styles.container}>
         {data ? (
           data.deathScene ? (
-            <View style={styles.container}>
-              <Text id="death-scene">{data.deathScene}</Text>
-            </View>
+            <Text style={styles.deathScene}>{data.deathScene}</Text>
           ) : (
-            <View style={styles.container}>
-              <Text style={styles.title}>
-                Name: <Text id='userName'>{data.user.name}</Text>
-              </Text>
-              <Text style={styles.title}>
-                Age: <Text id='userAge'>{data.user.age}</Text>
-              </Text>
-              <Text style={styles.title}>
-                Race: <Text id='userRace'>{data.user.race}</Text>
-              </Text>
-              <Text style={styles.title}>
-                Class: <Text id='userClass'>{data.user.class}</Text>
-              </Text>
+            <View>
+              <Text style={styles.title}>Name: {data.user.name}</Text>
+              <Text style={styles.title}>Age: {data.user.age}</Text>
+              <Text style={styles.title}>Race: {data.user.race}</Text>
+              <Text style={styles.title}>Class: {data.user.class}</Text>
             </View>
           )
         ) : (
           <Text style={styles.title}>Loading...</Text>
         )}
-      </View >
-      {data && data.scene ? <View style={styles.container} id='scene'>{data.scene}</View> : null}
+      </View>
+      {data && data.scene ? <Text style={styles.scene}>{data.scene}</Text> : null}
       {data && !data.deathScene ? (
-        <form id='optionsForm' onSubmit={handleUserChoice}>
-          <fieldset>
-            <legend>Options</legend>
-            <View style={styles.container} id='optionsList'>{renderOptions()}</View>
-          </fieldset>
-          <button type='submit'>Submit Choice</button>
-        </form>
+        <View style={styles.optionsContainer}>
+          <Text style={styles.optionsHeader}>Options:</Text>
+          {renderOptions()}
+          <Button title='Submit Choice' onPress={handleUserChoice} />
+        </View>
       ) : null}
     </View>
   );
@@ -118,21 +95,49 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 20,
     backgroundColor: '#f0f8ff',
-    marginBottom: 120,
   },
   title: {
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 12,
     color: '#E63946',
   },
   header: {
-    fontSize: 50,
+    fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 12,
     color: '#E63946',
+    marginBottom: 20,
+  },
+  deathScene: {
+    fontSize: 18,
+    color: 'red',
+    textAlign: 'center',
+  },
+  scene: {
+    fontSize: 18,
+    color: '#333',
+    textAlign: 'center',
+    marginVertical: 10,
+  },
+  optionsContainer: {
+    marginTop: 20,
+  },
+  optionsHeader: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 10,
+  },
+  button: {
+    backgroundColor: '#4e9af1',
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: 'white',
+    textAlign: 'center',
   },
 });
 

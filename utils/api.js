@@ -1,18 +1,19 @@
-import axios from 'axios';
-import { useEffect } from 'react';
-import Config from 'react-native-config';
+// import axios from 'axios';
+// import Config from 'react-native-config';
 
 
-const SERVER_URL = Config.SERVER_URL;
+// const SERVER_URL = Config.SERVER_URL;
 
-export const fetchInitialData = async () => {
-  try {
-    const response = await axios.post(`${SERVER_URL}/adventure`);
-    return response.data;
-  } catch (error) {
-    console.error('Error:', error);
-  }
-};
+// export const fetchInitialData = async () => {
+//   try {
+//     const response = await axios.post(`${SERVER_URL}/adventure`);
+//     const responseData = response.data;
+//     console.log("HERE'S THE RESPONSE ", response);
+//     populateFormWithData(responseData);
+//   } catch (error) {
+//     console.error('Error:', error);
+//   }
+// };
 
 // const express = require('express');
 // const bodyParser = require('body-parser');
