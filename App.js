@@ -3,6 +3,13 @@ import { StyleSheet, Text, View } from 'react-native';
 import AppNavigator from './navigation/AppNavigator';
 
 export default function App() {
+  useEffect(() => {
+    var config = {
+      method: 'get',
+      url: 'https://tjmp838d98.execute-api.us-west-2.amazonaws.com/WorkingGET/user/1',
+      headers: { }    
+    };
+  })
   return (
     <View style={styles.container}>
       <AppNavigator />
