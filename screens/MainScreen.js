@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity, Button, Alert } from 'react-n
 import axios from 'axios';
 import Config from 'react-native-config';
 
-const serverUrl = Config.SERVER_URL;
+const SERVER_URL = Config.REACT_NATIVE_SERVER_URL;
 
 const MainScreen = () => {
   const [data, setData] = useState(null);
@@ -12,7 +12,7 @@ const MainScreen = () => {
   // Function to fetch initial data from the server
   const fetchInitialData = async () => {
     try {
-      const response = await axios.post(`${serverUrl}/adventure`);
+      const response = await axios.post(`${SERVER_URL}/adventure`);
       setData(response.data);
     } catch (error) {
       console.error('Error:', error);
@@ -29,7 +29,7 @@ const MainScreen = () => {
   const handleUserChoice = async () => {
     if (userChoice !== null && data !== null) {
       try {
-        const response = await axios.post(`${serverUrl}/adventure`, {
+        const response = await axios.post(`${SERVER_URL}/adventure`, {
           ...data,
           userChoice,
         });
