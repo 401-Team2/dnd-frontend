@@ -7,7 +7,7 @@ const characterCreatorSlice = createSlice({
   initialState: {
     name: '',
     race: '',
-    class: '',
+    characterClass: '',
     age: '',
   },
   reducers: {
@@ -18,7 +18,7 @@ const characterCreatorSlice = createSlice({
     resetCharacterForm: (state) => {
       state.name = '';
       state.race = '';
-      state.class = '';
+      state.characterClass = '';
       state.age = '';
     },
   },
