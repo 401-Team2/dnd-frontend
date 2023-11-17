@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-const UserInfo = ({ user }) => {
+const CharacterInfo = ({ user }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.description}>Name: {user?.name}</Text>
@@ -25,4 +25,4 @@ const styles = {
   },
 };
 
-export default UserInfo;
+export default CharacterInfo;
