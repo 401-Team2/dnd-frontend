@@ -42,15 +42,15 @@ const api = {
       throw error;
     }
   },
-  createCharacters: async () => {
+  createCharacter: async (characterData) => {
     try {
-      const response = await axios.get(`${API_GATEWAY_URL}/createcharacter`, characterData);
+      const response = await axios.post(`${API_GATEWAY_URL}/createcharacter`, characterData);
       return response.data;
     } catch (error) {
-      console.error('Error creating characters:', error);
+      console.error('Error creating character:', error);
       throw error;
     }
-  }
+  },
 };
 
 export default api;

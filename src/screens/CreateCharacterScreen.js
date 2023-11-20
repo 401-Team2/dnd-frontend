@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Picker, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+// import { Picker } from '@react-native-picker/picker';
+import RNPickerSelect from 'react-native-picker-select';
 import api from '../api/Api';
+
+// api.createCharacter(characterData);
 
 const CreateCharacterScreen = ({ navigation }) => {
   const [name, setName] = useState('');
@@ -75,54 +79,52 @@ const CreateCharacterScreen = ({ navigation }) => {
     <View style={styles.container}>
       <TextInput
         style={styles.input}
-        placeholder="Name"
+        placeholder="Type your character name"
         value={name}
         onChangeText={setName}
       />
-      <Picker
-        selectedValue={age}
-        style={styles.picker}
-        onValueChange={(itemValue, itemIndex) => setAge(itemValue)}
-      >
-        {[...Array(ageLimit + 1).keys()].map((ageNumber) => (
-          <Picker.Item key={ageNumber} label={ageNumber.toString()} value={ageNumber} />
-        ))}
-      </Picker>
-      <Picker
-        selectedValue={gender}
-        style={styles.picker}
-        onValueChange={(itemValue, itemIndex) => setGender(itemValue)}
-      >
-        <Picker.Item label="Male" value="Male" />
-        <Picker.Item label="Female" value="Female" />
-        <Picker.Item label="Shapeshifter" value="Shapeshifter" />
-        <Picker.Item label="Elfritch" value="Elfritch" />
-        <Picker.Item label="Primordial" value="Primordial" />
-        <Picker.Item label="Numinous" value="Numinous" />
-        <Picker.Item label="Transcendent" value="Transcendent" />
-      </Picker>
-      <Picker
-        selectedValue={race}
-        style={styles.picker}
-        onValueChange={(itemValue, itemIndex) => handleRaceChange(itemValue)}
-      >
-        <Picker.Item label="Human" value="Human" />
-        <Picker.Item label="Elf" value="Elf" />
-        <Picker.Item label="Aasimar" value="Aasimar" />
-        <Picker.Item label="Halflings" value="Halflings" />
-        <Picker.Item label="Dragonborn" value="Dragonborn" />
-        <Picker.Item label="Fairy" value="Fairy" />
-      </Picker>
-      <Picker
-        selectedValue={characterClass}
-        style={styles.picker}
+      <RNPickerSelect
+        style={pickerSelectStyles}
+        placeholder={{ label: 'Select Age', value: null }}
+        onValueChange={(itemValue) => setAge(itemValue)}
+        items={[...Array(ageLimit + 1).keys()].map(ageNumber => ({ label: ageNumber.toString(), value: ageNumber }))}
+      />
+      <RNPickerSelect
+        style={pickerSelectStyles}
+        placeholder={{ label: 'Select Gender', value: null }}
+        onValueChange={(itemValue) => setGender(itemValue)}
+        items={[
+          { label: 'Male', value: 'Male' },
+          { label: 'Female', value: 'Female' },
+          { label: 'Shapeshifter', value: 'Shapeshifter' },
+          { label: 'Elfritch', value: 'Elfritch' },
+          { label: 'Primordial', value: 'Primordial' },
+          { label: 'Numinous', value: 'Numinous' },
+          { label: 'Transcendent', value: 'Transcendent' },
+        ]}
+      />
+      <RNPickerSelect
+        style={pickerSelectStyles}
+        placeholder={{ label: 'Select Race', value: null }}
+        onValueChange={handleRaceChange}
+        items={[
+          { label: 'Human', value: 'Human' },
+          { label: 'Elf', value: 'Elf' },
+          { label: 'Aasimar', value: 'Aasimar' },
+          { label: 'Halflings', value: 'Halflings' },
+          { label: 'Dragonborn', value: 'Dragonborn' },
+          { label: 'Fairy', value: 'Fairy' },
+        ]}
+      />
+      <RNPickerSelect
+        style={pickerSelectStyles}
+        placeholder={{ label: 'Select Class', value: null }}
         onValueChange={(itemValue) => setCharacterClass(itemValue)}
-      >
-        {classes.map((cls, index) => (
-          <Picker.Item key={index} label={cls} value={cls} />
-        ))}
-      </Picker>
-      <Button title="Create Character" onPress={handleCreateCharacter} />
+        items={classes.map(cls => ({ label: cls, value: cls }))}
+      />
+      <TouchableOpacity style={styles.button} onPress={handleCreateCharacter}>
+        <Text style={styles.buttonText}>Create Character</Text>
+      </TouchableOpacity>    
     </View>
   );
 };
@@ -131,19 +133,59 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#000',
   },
   input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 10,
-    paddingHorizontal: 10,
-  },
-  picker: {
     height: 50,
-    width: '100%',
-    marginBottom: 10,
+    borderColor: 'gold',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 15,
+    paddingHorizontal: 15,
+    fontSize: 16,
+    color: 'gold',
+    backgroundColor: '#000',
   },
+  button: {
+    backgroundColor: 'gold',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 15,
+  },
+  buttonText: {
+    color: '#000',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
+
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+    height: 50,
+    borderColor: 'gold',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 15,
+    paddingHorizontal: 15,
+    fontSize: 16,
+    backgroundColor: '#000',
+  },
+  inputAndroid: {
+    height: 50,
+    borderColor: 'gold',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 15,
+    paddingHorizontal: 15,
+    fontSize: 16,
+    backgroundColor: '#000',
+  },
+  
 });
 
 export default CreateCharacterScreen;

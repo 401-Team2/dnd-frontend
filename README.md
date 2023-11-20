@@ -83,7 +83,7 @@
 
 ### Wireframe
 
-![Quest Forge 2.0 Wireframe]()
+![Quest Forge 2.0 Wireframe](./assets/wireframe.png)
 
 ### Domain Model
 

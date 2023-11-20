@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Button, FlatList, StyleSheet } from 'react-native';
-// import axios from 'axios';
 import api from '../api/Api';
 import CharacterCard from '../components/CharacterCard';
 
 const LoadGameScreen = ({ navigation }) => {
-  const [characters, setCharacters] = useState([]);
+  // Initial mock character for demonstration
+  const mockCharacter = {
+    id: 1,
+    name: 'Aragorn',
+    race: 'Human',
+    class: 'Ranger',
+    age: 87
+  };
+
+  const [characters, setCharacters] = useState([mockCharacter]);
 
   useEffect(() => {
     fetchCharacters();
@@ -13,8 +21,10 @@ const LoadGameScreen = ({ navigation }) => {
 
   const fetchCharacters = async () => {
     try {
+      // Fetch characters from the API
       const charactersData = await api.fetchCharacters();
-      setCharacters(charactersData);
+      // Combine API data with the mock character
+      setCharacters([mockCharacter, ...charactersData]);
     } catch (error) {
       console.error('Error fetching characters:', error);
     }
@@ -28,10 +38,12 @@ const LoadGameScreen = ({ navigation }) => {
     <View style={styles.container}>
       <Text style={styles.title}>Load Game</Text>
       <FlatList
+        style={styles.list}
         data={characters}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <CharacterCard 
+          style={styles.characterCard}
             character={item} 
             onSelect={() => handleCharacterSelect(item)} 
           />
@@ -46,10 +58,26 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#000',
   },
   title: {
     fontSize: 24,
-    marginBottom: 20,
+    marginTop: 20,
+    marginBottom: 10,
+    color: 'gold',
+  },
+  list: {
+    flex: 1,
+    width: '100%',
+    // alignItems: 'left',
+    // justifyContent: 'left',
+    backgroundColor: '#000',
+    marginRight: 10,
+  },
+  characterCard: {
+    alignItems: 'left',
+    // justifyContent: 'left',
+    backgroundColor: '#000',
   },
 });
 
