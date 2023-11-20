@@ -1,13 +1,22 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
+import AragornImg from '../../assets/Aragorn.png';
 
 const CharacterCard = ({ character }) => {
   return (
     <View style={styles.card}>
-      <Text style={styles.name}>{character.name}</Text>
-      <Text>Race: {character.race}</Text>
-      <Text>Class: {character.class}</Text>
-      <Text>Age: {character.age}</Text>
+      <View style={styles.leftContainer}>
+        <Image
+          style={styles.icon}
+          source={AragornImg}
+        />
+        <Text style={styles.name}>{character.name}</Text>
+      </View>
+      <View style={styles.details}>
+        <Text style={styles.info}>Age: {character.age}</Text>
+        <Text style={styles.info}>Race: {character.race}</Text>
+        <Text style={styles.info}>Class: {character.class}</Text>
+      </View>
     </View>
   );
 };
@@ -15,7 +24,9 @@ const CharacterCard = ({ character }) => {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: '#fff',
-    padding: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 13,
     marginVertical: 8,
     marginHorizontal: 16,
     borderRadius: 10,
@@ -24,10 +35,27 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    width: '100%',
+  },
+  leftContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginRight: 20,
+  },
+  icon: {
+    width: 70,
+    height: 70,
+    borderRadius: 25,
   },
   name: {
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  details: {
+    flex: 1
+  },
+  info: {
+    fontSize: 14,
   },
 });
 

@@ -3,7 +3,7 @@ import { View, Text, Button, TextInput, Picker, TouchableOpacity, StyleSheet } f
 import api from '../api/Api';
 // import axios from 'axios';
 
-const SERVER_URL = 'https://tjmp838d98.execute-api.us-west-2.amazonaws.com/WorkingPOST';
+// const SERVER_URL = 'https://tjmp838d98.execute-api.us-west-2.amazonaws.com/WorkingPOST';
 
 const QuestForgeScreen = ({ route }) => {
   const [data, setData] = useState(null);
