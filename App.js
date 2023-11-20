@@ -8,6 +8,7 @@ import LoadGameScreen from './src/screens/LoadGameScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 import AboutScreen from './src/screens/AboutScreen';
 import QuestForgeScreen from './src/screens/QuestForgeScreen';
+import CreateCharacterScreen from './src/screens/CreateCharacterScreen';
 
 const Stack = createStackNavigator();
 
@@ -20,8 +21,9 @@ const App = () => {
           <Stack.Screen name="QuestForge" component={QuestForgeScreen} />
           <Stack.Screen name="StartGame" component={StartGameScreen} />
           <Stack.Screen name="LoadGame" component={LoadGameScreen} />
-          <Stack.Screen name="OptionsMenu" component={SettingsScreen} />
+          <Stack.Screen name="Settings" component={SettingsScreen} />
           <Stack.Screen name="About" component={AboutScreen} />
+          <Stack.Screen name="CreateCharacter" component={CreateCharacterScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>

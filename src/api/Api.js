@@ -41,6 +41,15 @@ const api = {
       console.error('Error fetching characters:', error);
       throw error;
     }
+  },
+  createCharacters: async () => {
+    try {
+      const response = await axios.get(`${API_GATEWAY_URL}/createcharacter`, characterData);
+      return response.data;
+    } catch (error) {
+      console.error('Error creating characters:', error);
+      throw error;
+    }
   }
 };
 
