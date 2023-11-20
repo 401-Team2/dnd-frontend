@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { ImageBackground, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 // import { Picker } from '@react-native-picker/picker';
 import RNPickerSelect from 'react-native-picker-select';
 import api from '../api/Api';
+import bgImg from '../../assets/bgImg.jpeg';
 
 // api.createCharacter(characterData);
 
@@ -76,7 +77,10 @@ const CreateCharacterScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <ImageBackground 
+      source={bgImg}
+      style={{flex: 1, justifyContent: 'center', alignItems: 'center', opacity: 0.9}}
+    >      
       <TextInput
         style={styles.input}
         placeholder="Type your character name"
@@ -125,7 +129,7 @@ const CreateCharacterScreen = ({ navigation }) => {
       <TouchableOpacity style={styles.button} onPress={handleCreateCharacter}>
         <Text style={styles.buttonText}>Create Character</Text>
       </TouchableOpacity>    
-    </View>
+    </ImageBackground>
   );
 };
 

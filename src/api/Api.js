@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_GATEWAY_URL = 'https://tjmp838d98.execute-api.us-west-2.amazonaws.com/WorkingPOST/user/1';
+const API_GATEWAY_URL = 'https://questforgebackend.onrender.com';
 
 const api = {
   startNewGame: async () => {

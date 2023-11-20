@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button, FlatList, StyleSheet } from 'react-native';
+import { View, Text, ImageBackground, FlatList, StyleSheet } from 'react-native';
 import api from '../api/Api';
 import CharacterCard from '../components/CharacterCard';
+import bgImg from '../../assets/bgImg.jpeg';
 
 const LoadGameScreen = ({ navigation }) => {
   // Initial mock character for demonstration
@@ -35,7 +36,11 @@ const LoadGameScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    
+    <ImageBackground 
+      source={bgImg}
+      style={{flex: 1, justifyContent: 'center', alignItems: 'center', opacity: 0.9}}
+    >
       <Text style={styles.title}>Load Game</Text>
       <FlatList
         style={styles.list}
@@ -49,17 +54,17 @@ const LoadGameScreen = ({ navigation }) => {
           />
         )}
       />
-    </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#000',
-  },
+  // container: {
+  //   flex: 1,
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //   // backgroundColor: '#000',
+  // },
   title: {
     fontSize: 24,
     marginTop: 20,
@@ -71,7 +76,7 @@ const styles = StyleSheet.create({
     width: '100%',
     // alignItems: 'left',
     // justifyContent: 'left',
-    backgroundColor: '#000',
+    // backgroundColor: '#000',
     marginRight: 10,
   },
   characterCard: {
