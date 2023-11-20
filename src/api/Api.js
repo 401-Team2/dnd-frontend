@@ -1,6 +1,8 @@
 import axios from 'axios';
 
 const API_GATEWAY_URL = 'https://questforgebackend.onrender.com';
+// const API_GATEWAY_URL =
+//   'https://tjmp838d98.execute-api.us-west-2.amazonaws.com/WorkingPOST/user/1';
 
 const api = {
   startNewGame: async () => {
@@ -15,7 +17,9 @@ const api = {
 
   loadGame: async (characterId) => {
     try {
-      const response = await axios.post(`${API_GATEWAY_URL}/loadgame`, { characterId });
+      const response = await axios.post(`${API_GATEWAY_URL}/loadgame`, {
+        characterId,
+      });
       return response.data;
     } catch (error) {
       console.error('Error loading game:', error);
@@ -25,7 +29,10 @@ const api = {
 
   continueGame: async (data, userChoice) => {
     try {
-      const response = await axios.post(`${API_GATEWAY_URL}/adventure`, { ...data, userChoice });
+      const response = await axios.post(`${API_GATEWAY_URL}/adventure`, {
+        ...data,
+        userChoice,
+      });
       return response.data;
     } catch (error) {
       console.error('Error continuing game:', error);
@@ -44,7 +51,10 @@ const api = {
   },
   createCharacter: async (characterData) => {
     try {
-      const response = await axios.post(`${API_GATEWAY_URL}/createcharacter`, characterData);
+      const response = await axios.post(
+        `${API_GATEWAY_URL}/createcharacter`,
+        characterData
+      );
       return response.data;
     } catch (error) {
       console.error('Error creating character:', error);
