@@ -1,28 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import AppNavigator from './navigation/AppNavigator';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { ThemeProvider } from './src/utils/ThemeContext';
+import HomeScreen from './src/screens/HomeScreen';
+import StartGameScreen from './src/screens/StartGameScreen';
+import LoadGameScreen from './src/screens/LoadGameScreen';
+import SettingsScreen from './src/screens/SettingsScreen';
+import AboutScreen from './src/screens/AboutScreen';
+import QuestForgeScreen from './src/screens/QuestForgeScreen';
 
-export default function App() {
-  useEffect(() => {
-    var config = {
-      method: 'get',
-      url: 'https://tjmp838d98.execute-api.us-west-2.amazonaws.com/WorkingGET/user/1',
-      headers: { }    
-    };
-  })
+const Stack = createStackNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <AppNavigator />
-      <StatusBar style="auto" />
-    </View>
+    <ThemeProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="QuestForge" component={QuestForgeScreen} />
+          <Stack.Screen name="StartGame" component={StartGameScreen} />
+          <Stack.Screen name="LoadGame" component={LoadGameScreen} />
+          <Stack.Screen name="OptionsMenu" component={SettingsScreen} />
+          <Stack.Screen name="About" component={AboutScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ThemeProvider>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
