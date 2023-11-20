@@ -7,7 +7,7 @@ const HomeScreen = ({ navigation }) => {
       <Text style={styles.title}>Welcome to QuestForge</Text>
       <Button title="Start Game" onPress={() => navigation.navigate('StartGame')} />
       <Button title="Load Game" onPress={() => navigation.navigate('LoadGame')} />
-      <Button title="Options" onPress={() => navigation.navigate('OptionsMenu')} />
+      <Button title="Settings" onPress={() => navigation.navigate('Settings')} />
       <Button title="About" onPress={() => navigation.navigate('About')} />
     </View>
   );

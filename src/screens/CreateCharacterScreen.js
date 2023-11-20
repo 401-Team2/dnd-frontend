@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Picker, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import api from '../api/Api';
+
+// api.createCharacter(characterData);
 
 const CreateCharacterScreen = ({ navigation }) => {
   const [name, setName] = useState('');
@@ -82,7 +85,7 @@ const CreateCharacterScreen = ({ navigation }) => {
       <Picker
         selectedValue={age}
         style={styles.picker}
-        onValueChange={(itemValue, itemIndex) => setAge(itemValue)}
+        onValueChange={(itemValue) => setAge(itemValue)}
       >
         {[...Array(ageLimit + 1).keys()].map((ageNumber) => (
           <Picker.Item key={ageNumber} label={ageNumber.toString()} value={ageNumber} />
@@ -91,7 +94,7 @@ const CreateCharacterScreen = ({ navigation }) => {
       <Picker
         selectedValue={gender}
         style={styles.picker}
-        onValueChange={(itemValue, itemIndex) => setGender(itemValue)}
+        onValueChange={(itemValue) => setGender(itemValue)}
       >
         <Picker.Item label="Male" value="Male" />
         <Picker.Item label="Female" value="Female" />
@@ -104,7 +107,7 @@ const CreateCharacterScreen = ({ navigation }) => {
       <Picker
         selectedValue={race}
         style={styles.picker}
-        onValueChange={(itemValue, itemIndex) => handleRaceChange(itemValue)}
+        onValueChange={(itemValue) => handleRaceChange(itemValue)}
       >
         <Picker.Item label="Human" value="Human" />
         <Picker.Item label="Elf" value="Elf" />
@@ -140,7 +143,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   picker: {
-    height: 50,
+    height: 100,
     width: '100%',
     marginBottom: 10,
   },
