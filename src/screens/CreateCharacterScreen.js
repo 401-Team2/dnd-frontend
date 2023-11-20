@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
-import { ImageBackground, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+  ImageBackground,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
 // import { Picker } from '@react-native-picker/picker';
 import RNPickerSelect from 'react-native-picker-select';
 import api from '../api/Api';
 import bgImg from '../../assets/bgImg.jpeg';
+import { v4 as uuidv4 } from 'uuid';
 
 // api.createCharacter(characterData);
 
@@ -31,11 +38,11 @@ const CreateCharacterScreen = ({ navigation }) => {
     Tiefling: 150,
     Warforged: Infinity,
     Rakshasa: 5000,
-    Elemental: 5000
+    Elemental: 5000,
   };
 
   const getAgeLimit = (selectedRace) => {
-    return ageLimits[selectedRace] || ageLimits['Human']; 
+    return ageLimits[selectedRace] || ageLimits['Human'];
   };
 
   const [ageLimit, setAgeLimit] = useState(getAgeLimit(race));
@@ -53,18 +60,21 @@ const CreateCharacterScreen = ({ navigation }) => {
 
   const handleCreateCharacter = async () => {
     if (!name.trim() || !age) {
-      alert("Please fill in all character details.");
+      alert('Please fill in all character details.');
       return;
     }
-  
+
+    const id = uuidv4();
+
     const newCharacter = {
+      id: id,
       name: name,
       age: age,
       race: race,
       class: characterClass,
       gender: gender,
     };
-  
+
     try {
       await api.createCharacter(newCharacter);
     } catch (error) {
@@ -72,15 +82,23 @@ const CreateCharacterScreen = ({ navigation }) => {
       alert('Failed to create character');
       return;
     }
-  
-    navigation.navigate('QuestForge', { newGame: true, character: newCharacter });
+
+    navigation.navigate('QuestForge', {
+      newGame: true,
+      character: newCharacter,
+    });
   };
 
   return (
-    <ImageBackground 
+    <ImageBackground
       source={bgImg}
-      style={{flex: 1, justifyContent: 'center', alignItems: 'center', opacity: 0.9}}
-    >      
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        opacity: 0.9,
+      }}
+    >
       <TextInput
         style={styles.input}
         placeholder="Type your character name"
@@ -91,7 +109,10 @@ const CreateCharacterScreen = ({ navigation }) => {
         style={pickerSelectStyles}
         placeholder={{ label: 'Select Age', value: null }}
         onValueChange={(itemValue) => setAge(itemValue)}
-        items={[...Array(ageLimit + 1).keys()].map(ageNumber => ({ label: ageNumber.toString(), value: ageNumber }))}
+        items={[...Array(ageLimit + 1).keys()].map((ageNumber) => ({
+          label: ageNumber.toString(),
+          value: ageNumber,
+        }))}
       />
       <RNPickerSelect
         style={pickerSelectStyles}
@@ -124,11 +145,11 @@ const CreateCharacterScreen = ({ navigation }) => {
         style={pickerSelectStyles}
         placeholder={{ label: 'Select Class', value: null }}
         onValueChange={(itemValue) => setCharacterClass(itemValue)}
-        items={classes.map(cls => ({ label: cls, value: cls }))}
+        items={classes.map((cls) => ({ label: cls, value: cls }))}
       />
       <TouchableOpacity style={styles.button} onPress={handleCreateCharacter}>
         <Text style={styles.buttonText}>Create Character</Text>
-      </TouchableOpacity>    
+      </TouchableOpacity>
     </ImageBackground>
   );
 };
@@ -189,7 +210,6 @@ const pickerSelectStyles = StyleSheet.create({
     fontSize: 16,
     backgroundColor: '#000',
   },
-  
 });
 
 export default CreateCharacterScreen;
