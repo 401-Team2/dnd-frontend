@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_GATEWAY_URL = 'https://questforgebackend.onrender.com';
+const API_GATEWAY_URL = 'http://localhost:3001';
 
 const api = {
   startNewGame: async () => {
@@ -42,15 +42,15 @@ const api = {
       throw error;
     }
   },
-  createCharacter: async (characterData) => {
+  createCharacters: async (characterData) => {
     try {
-      const response = await axios.post(`${API_GATEWAY_URL}/createcharacter`, characterData);
+      const response = await axios.post(`${API_GATEWAY_URL}/characters`, characterData);
       return response.data;
     } catch (error) {
-      console.error('Error creating character:', error);
+      console.error('Error creating characters:', error);
       throw error;
     }
-  },
+  }
 };
 
 export default api;
