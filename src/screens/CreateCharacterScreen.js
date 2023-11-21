@@ -10,7 +10,7 @@ import {
 import RNPickerSelect from 'react-native-picker-select';
 import api from '../api/Api';
 import bgImg from '../../assets/bgImg.jpeg';
-import { v4 as uuidv4 } from 'uuid';
+
 
 // api.createCharacter(characterData);
 
@@ -69,6 +69,8 @@ const CreateCharacterScreen = ({ navigation }) => {
       gender: gender,
     };
 
+    
+
     try {
       await api.createCharacters(newCharacter);
     } catch (error) {
@@ -95,10 +97,21 @@ const CreateCharacterScreen = ({ navigation }) => {
     >
       <TextInput
         style={styles.input}
-        placeholder="Type your character name"
+        placeholder="Enter Name"
         value={name}
         onChangeText={setName}
       />
+
+      <RNPickerSelect
+        style={pickerSelectStyles}
+        placeholder={{ label: 'Enter ID', value: null }}
+        onValueChange={(itemValue) => setID(itemValue)}
+        items={[...Array(ageLimit + 1).keys()].map((IDNumber) => ({
+          label: IDNumber.toString(),
+          value: IDNumber,
+        }))}
+      />
+
       <RNPickerSelect
         style={pickerSelectStyles}
         placeholder={{ label: 'Select Age', value: null }}
