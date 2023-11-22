@@ -9,7 +9,8 @@ import {
 } from 'react-native';
 // import { Picker } from '@react-native-picker/picker';
 import RNPickerSelect from 'react-native-picker-select';
-import { createCharacter } from '../api/Api';
+//import { createCharacter } from '../api/Api';
+import api from '../api/Api.js';
 import bgImg from '../../assets/bgImg.jpeg';
 import axios from 'axios';
 
@@ -92,7 +93,7 @@ const CreateCharacterScreen = ({ navigation }) => {
     // };
 
     try {
-      await api.createCharacters(newCharacter);
+      await api.createCharacter(newCharacter);
     } catch (error) {
       console.error('Error creating character:', error);
       alert('Failed to create character');
