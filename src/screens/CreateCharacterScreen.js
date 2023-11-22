@@ -72,7 +72,7 @@ const CreateCharacterScreen = ({ navigation }) => {
     // const characterId = uuidv4();
 
     const newCharacter = {
-      // id: ID,
+      id: 1,
       name: name,
       age: age,
       race: race,
