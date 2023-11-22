@@ -10,7 +10,9 @@ import {
 import RNPickerSelect from 'react-native-picker-select';
 import api from '../api/Api';
 import bgImg from '../../assets/bgImg.jpeg';
+import axios from 'axios';
 
+const createCharacterURL = 'https://tjmp838d98.execute-api.us-west-2.amazonaws.com/WorkingPOST';
 
 // api.createCharacter(characterData);
 
@@ -83,6 +85,20 @@ const CreateCharacterScreen = ({ navigation }) => {
       newGame: true,
       character: newCharacter,
     });
+  };
+
+  const handlePrompt =  async() => {
+    const characterId = Date.now();
+
+    axios.post(createCharacterURL, {
+      name: name,
+      id: characterId,
+      class: characterClass,
+      race: race,
+      age: age,
+    });
+
+    const prompt = await axios.post(createCharacterURL + `/user/${characterId}`)
   };
 
   return (
