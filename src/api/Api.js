@@ -3,6 +3,7 @@ import axios from 'axios';
 const API_GATEWAY_URL = 'https://questforgebackend.onrender.com';
 // const API_GATEWAY_URL =
 //   'https://tjmp838d98.execute-api.us-west-2.amazonaws.com/WorkingPOST/user/1';
+// const API_GATEWAY_URL = 'http://localhost:3001';
 
 const api = {
   startNewGame: async () => {
@@ -49,15 +50,15 @@ const api = {
       throw error;
     }
   },
-  createCharacter: async (characterData) => {
+  createCharacters: async (characterData) => {
     try {
       const response = await axios.post(
-        `${API_GATEWAY_URL}/createcharacter`,
+        `${API_GATEWAY_URL}/characters`,
         characterData
       );
       return response.data;
     } catch (error) {
-      console.error('Error creating character:', error);
+      console.error('Error creating characters:', error);
       throw error;
     }
   },

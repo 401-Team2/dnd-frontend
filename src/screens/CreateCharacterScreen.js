@@ -59,24 +59,18 @@ const CreateCharacterScreen = ({ navigation }) => {
   const classes = ['Barbarian', 'Mage', 'Archmage', 'Warrior', 'Archer'];
 
   const handleCreateCharacter = async () => {
-    if (!name.trim() || !age) {
-      alert('Please fill in all character details.');
-      return;
-    }
-
-    const id = uuidv4();
-
+    
+  
     const newCharacter = {
-      id: id,
       name: name,
       age: age,
       race: race,
-      class: characterClass,
+      characterClass: characterClass,
       gender: gender,
     };
 
     try {
-      await api.createCharacter(newCharacter);
+      await api.createCharacters(newCharacter);
     } catch (error) {
       console.error('Error creating character:', error);
       alert('Failed to create character');
