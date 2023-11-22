@@ -26,16 +26,16 @@ const LoadGameScreen = ({ navigation }) => {
     fetchCharacters();
   }, []);
 
-  const fetchCharacters = async () => {
-    try {
-      // Fetch characters from the API
-      const charactersData = await api.fetchCharacters();
-      // Combine API data with the mock character
-      setCharacters([mockCharacter, ...charactersData]);
-    } catch (error) {
-      console.error('Error fetching characters:', error);
-    }
-  };
+  // const fetchCharacters = async () => {
+  //   try {
+  //     // Fetch characters from the API
+  //     const charactersData = await api.fetchCharacters();
+  //     // Combine API data with the mock character
+  //     setCharacters([mockCharacter, ...charactersData]);
+  //   } catch (error) {
+  //     console.error('Error fetching characters:', error);
+  //   }
+  // };
 
   const handleCharacterSelect = (character) => {
     navigation.navigate('QuestForge', { character: character });

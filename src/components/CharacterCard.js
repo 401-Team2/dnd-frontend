@@ -16,6 +16,7 @@ const CharacterCard = ({ character }) => {
         <Text style={styles.info}>Age: {character.age}</Text>
         <Text style={styles.info}>Race: {character.race}</Text>
         <Text style={styles.info}>Class: {character.class}</Text>
+        <Text style={styles.info}>Id: {character.id}</Text>
       </View>
     </View>
   );

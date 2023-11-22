@@ -1,67 +1,48 @@
 import axios from 'axios';
 
-const API_GATEWAY_URL = 'https://questforgebackend.onrender.com';
-// const API_GATEWAY_URL =
-//   'https://tjmp838d98.execute-api.us-west-2.amazonaws.com/WorkingPOST/user/1';
-// const API_GATEWAY_URL = 'http://localhost:3001';
+const API_URL = 'https://questforgebackend.onrender.com'; // Replace with your server URL
 
-const api = {
-  startNewGame: async () => {
-    try {
-      const response = await axios.post(`${API_GATEWAY_URL}/startgame`);
-      return response.data;
-    } catch (error) {
-      console.error('Error starting new game:', error);
-      throw error;
-    }
-  },
-
-  loadGame: async (characterId) => {
-    try {
-      const response = await axios.post(`${API_GATEWAY_URL}/loadgame`, {
-        characterId,
-      });
-      return response.data;
-    } catch (error) {
-      console.error('Error loading game:', error);
-      throw error;
-    }
-  },
-
-  continueGame: async (data, userChoice) => {
-    try {
-      const response = await axios.post(`${API_GATEWAY_URL}/adventure`, {
-        ...data,
-        userChoice,
-      });
-      return response.data;
-    } catch (error) {
-      console.error('Error continuing game:', error);
-      throw error;
-    }
-  },
-
-  fetchCharacters: async () => {
-    try {
-      const response = await axios.get(`${API_GATEWAY_URL}/characters`);
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching characters:', error);
-      throw error;
-    }
-  },
-  createCharacters: async (characterData) => {
-    try {
-      const response = await axios.post(
-        `${API_GATEWAY_URL}/characters`,
-        characterData
-      );
-      return response.data;
-    } catch (error) {
-      console.error('Error creating characters:', error);
-      throw error;
-    }
-  },
+export const createCharacter = async (characterData) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}/character/createcharacter`,
+      characterData
+    );
+    return response.data;
+  } catch (error) {
+    console.error('Error creating character:', error);
+    throw error;
+  }
 };
 
-export default api;
+export const startNewGame = async (characterData) => {
+  try {
+    const response = await axios.post(`${API_URL}/game/startgame`, {
+      characterData,
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error starting new game:', error);
+    throw error;
+  }
+};
+
+// export const generateStory = async (prompt) => {
+//   try {
+//     const response = await axios.post(`https://tjmp838d98.execute-api.us-west-2.amazonaws.com/WorkingPOST/user/{USER_ID}`);
+//     return response.data;
+//   } catch (error) {
+//     console.error('Error generating story:', error);
+//     throw error;
+//   }
+// };
+
+// export const handleUserChoice = async (choice) => {
+//   try {
+//     const response = await axios.post(`https://tjmp838d98.execute-api.us-west-2.amazonaws.com/WorkingPOST/user/{USER_ID}`);
+//     return response.data;
+//   } catch (error) {
+//     console.error('Error handling user choice:', error);
+//     throw error;
+//   }
+// }
