@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, ImageBackground, FlatList, StyleSheet } from 'react-native';
-import api from '../api/Api';
+// import api from '../api/Api';
 import CharacterCard from '../components/CharacterCard';
 import bgImg from '../../assets/bgImg.jpeg';
 
@@ -20,16 +20,16 @@ const LoadGameScreen = ({ navigation }) => {
     fetchCharacters();
   }, []);
 
-  const fetchCharacters = async () => {
-    try {
-      // Fetch characters from the API
-      const charactersData = await api.fetchCharacters();
-      // Combine API data with the mock character
-      setCharacters([mockCharacter, ...charactersData]);
-    } catch (error) {
-      console.error('Error fetching characters:', error);
-    }
-  };
+  // const fetchCharacters = async () => {
+  //   try {
+  //     // Fetch characters from the API
+  //     const charactersData = await api.fetchCharacters();
+  //     // Combine API data with the mock character
+  //     setCharacters([mockCharacter, ...charactersData]);
+  //   } catch (error) {
+  //     console.error('Error fetching characters:', error);
+  //   }
+  // };
 
   const handleCharacterSelect = (character) => {
     navigation.navigate('QuestForge', { character: character });
