@@ -8,7 +8,7 @@ export const createCharacter = async (characterData) => {
     const response = await axios.post(`${API_URL}/character/createcharacter`, characterData);
     return response.data;
   } catch (error) {
-    console.error('Error creating character:', error);
+    console.error('Error creating character*:', error);
     throw error;
   }
 };

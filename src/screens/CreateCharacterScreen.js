@@ -10,9 +10,10 @@ import {
 // import { Picker } from '@react-native-picker/picker';
 import RNPickerSelect from 'react-native-picker-select';
 //import { createCharacter } from '../api/Api';
-import api from '../api/Api.js';
+import * as api from '../api/Api';
 import bgImg from '../../assets/bgImg.jpeg';
 import axios from 'axios';
+
 
 const createCharacterURL = 'https://tjmp838d98.execute-api.us-west-2.amazonaws.com/WorkingPOST';
 
@@ -64,10 +65,10 @@ const CreateCharacterScreen = ({ navigation }) => {
   const classes = ['Barbarian', 'Mage', 'Archmage', 'Warrior', 'Archer'];
 
     const handleCreateCharacter = async () => {
-      if (!name.trim() || !age) {
-        alert("Please fill in all character details.");
-        return;
-      }
+      // if (!name.trim() || !age) {
+      //   alert("Please fill in all character details.");
+      //   return;
+      // }
     
       // const characterId = uuidv4();
     
