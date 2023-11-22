@@ -1,10 +1,17 @@
 import 'react-native-get-random-values';
 import React, { useState } from 'react';
-import { ImageBackground, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+  ImageBackground,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
 // import { Picker } from '@react-native-picker/picker';
 import RNPickerSelect from 'react-native-picker-select';
 import { createCharacter } from '../api/Api';
 import bgImg from '../../assets/bgImg.jpeg';
+
 
 // api.createCharacter(characterData);
 
@@ -33,11 +40,11 @@ const CreateCharacterScreen = ({ navigation }) => {
     Tiefling: 150,
     Warforged: Infinity,
     Rakshasa: 5000,
-    Elemental: 5000
+    Elemental: 5000,
   };
 
   const getAgeLimit = (selectedRace) => {
-    return ageLimits[selectedRace] || ageLimits['Human']; 
+    return ageLimits[selectedRace] || ageLimits['Human'];
   };
 
   const [ageLimit, setAgeLimit] = useState(getAgeLimit(race));
@@ -97,13 +104,18 @@ const CreateCharacterScreen = ({ navigation }) => {
   };
 
   return (
-    <ImageBackground 
+    <ImageBackground
       source={bgImg}
-      style={{flex: 1, justifyContent: 'center', alignItems: 'center', opacity: 0.9}}
-    >      
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        opacity: 0.9,
+      }}
+    >
       <TextInput
         style={styles.input}
-        placeholder="Type your character name"
+        placeholder="Enter Name"
         value={name}
         onChangeText={setName}
       />
@@ -130,7 +142,10 @@ const CreateCharacterScreen = ({ navigation }) => {
         style={pickerSelectStyles}
         placeholder={{ label: 'Select Age', value: '' }}
         onValueChange={(itemValue) => setAge(itemValue)}
-        items={[...Array(ageLimit + 1).keys()].map(ageNumber => ({ label: ageNumber.toString(), value: ageNumber }))}
+        items={[...Array(ageLimit + 1).keys()].map((ageNumber) => ({
+          label: ageNumber.toString(),
+          value: ageNumber,
+        }))}
       />
       <RNPickerSelect
         style={pickerSelectStyles}
@@ -163,11 +178,11 @@ const CreateCharacterScreen = ({ navigation }) => {
         style={pickerSelectStyles}
         placeholder={{ label: 'Select Class', value: '' }}
         onValueChange={(itemValue) => setCharacterClass(itemValue)}
-        items={classes.map(cls => ({ label: cls, value: cls }))}
+        items={classes.map((cls) => ({ label: cls, value: cls }))}
       />
       <TouchableOpacity style={styles.button} onPress={handleCreateCharacter}>
         <Text style={styles.buttonText}>Create Character</Text>
-      </TouchableOpacity>    
+      </TouchableOpacity>
     </ImageBackground>
   );
 };
