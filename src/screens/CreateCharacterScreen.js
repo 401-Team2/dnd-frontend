@@ -1,3 +1,4 @@
+import 'react-native-get-random-values';
 import React, { useState } from 'react';
 import {
   ImageBackground,
@@ -8,7 +9,7 @@ import {
 } from 'react-native';
 // import { Picker } from '@react-native-picker/picker';
 import RNPickerSelect from 'react-native-picker-select';
-import api from '../api/Api';
+import { createCharacter } from '../api/Api';
 import bgImg from '../../assets/bgImg.jpeg';
 import axios from 'axios';
 
@@ -22,7 +23,8 @@ const CreateCharacterScreen = ({ navigation }) => {
   const [gender, setGender] = useState('Male');
   const [race, setRace] = useState('Human');
   const [characterClass, setCharacterClass] = useState('Barbarian');
-
+  const [ID, setID] = useState('');
+  
   const ageLimits = {
     Human: 100,
     Elf: 750,
@@ -60,18 +62,34 @@ const CreateCharacterScreen = ({ navigation }) => {
 
   const classes = ['Barbarian', 'Mage', 'Archmage', 'Warrior', 'Archer'];
 
-  const handleCreateCharacter = async () => {
+    const handleCreateCharacter = async () => {
+      if (!name.trim() || !age) {
+        alert("Please fill in all character details.");
+        return;
+      }
     
-  
-    const newCharacter = {
-      name: name,
-      age: age,
-      race: race,
-      characterClass: characterClass,
-      gender: gender,
-    };
+      // const characterId = uuidv4();
+    
+      const newCharacter = {
+        id: ID,
+        name: name,
+        age: age,
+        race: race,
+        class: characterClass,
+        gender: gender,
+      };
+    
+      // createCharacter(characterData);
 
-    
+    //   try {
+    //     await createCharacter(newCharacter);
+    //     navigation.navigate('QuestForge', { newGame: true, character: newCharacter });
+    //   } catch (error) {
+    //     console.error('Error creating character:', error);
+    //     alert('Failed to create character');
+    //     return;
+    //   }
+    // };
 
     try {
       await api.createCharacters(newCharacter);
@@ -120,17 +138,25 @@ const CreateCharacterScreen = ({ navigation }) => {
 
       <RNPickerSelect
         style={pickerSelectStyles}
-        placeholder={{ label: 'Enter ID', value: null }}
+        placeholder={{ label: 'Enter ID', value: '' }}
         onValueChange={(itemValue) => setID(itemValue)}
-        items={[...Array(ageLimit + 1).keys()].map((IDNumber) => ({
-          label: IDNumber.toString(),
-          value: IDNumber,
-        }))}
+        items={[
+          { label: '1', value: '1' },
+          { label: '2', value: '2' },
+          { label: '3', value: '3' },
+          { label: '4', value: '4' },
+          { label: '5', value: '5' },
+          { label: '6', value: '6' },
+          { label: '7', value: '7' },
+          { label: '8', value: '8' },
+          { label: '9', value: '9' },
+          { label: '10', value: '10' },
+        ]}
       />
 
       <RNPickerSelect
         style={pickerSelectStyles}
-        placeholder={{ label: 'Select Age', value: null }}
+        placeholder={{ label: 'Select Age', value: '' }}
         onValueChange={(itemValue) => setAge(itemValue)}
         items={[...Array(ageLimit + 1).keys()].map((ageNumber) => ({
           label: ageNumber.toString(),
@@ -139,7 +165,7 @@ const CreateCharacterScreen = ({ navigation }) => {
       />
       <RNPickerSelect
         style={pickerSelectStyles}
-        placeholder={{ label: 'Select Gender', value: null }}
+        placeholder={{ label: 'Select Gender', value: '' }}
         onValueChange={(itemValue) => setGender(itemValue)}
         items={[
           { label: 'Male', value: 'Male' },
@@ -153,7 +179,7 @@ const CreateCharacterScreen = ({ navigation }) => {
       />
       <RNPickerSelect
         style={pickerSelectStyles}
-        placeholder={{ label: 'Select Race', value: null }}
+        placeholder={{ label: 'Select Race', value: '' }}
         onValueChange={handleRaceChange}
         items={[
           { label: 'Human', value: 'Human' },
@@ -166,7 +192,7 @@ const CreateCharacterScreen = ({ navigation }) => {
       />
       <RNPickerSelect
         style={pickerSelectStyles}
-        placeholder={{ label: 'Select Class', value: null }}
+        placeholder={{ label: 'Select Class', value: '' }}
         onValueChange={(itemValue) => setCharacterClass(itemValue)}
         items={classes.map((cls) => ({ label: cls, value: cls }))}
       />
@@ -222,6 +248,7 @@ const pickerSelectStyles = StyleSheet.create({
     paddingHorizontal: 15,
     fontSize: 16,
     backgroundColor: '#000',
+    color: 'gold',
   },
   inputAndroid: {
     height: 50,
@@ -232,6 +259,7 @@ const pickerSelectStyles = StyleSheet.create({
     paddingHorizontal: 15,
     fontSize: 16,
     backgroundColor: '#000',
+    color : 'gold',
   },
 });
 
