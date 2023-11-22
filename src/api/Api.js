@@ -5,7 +5,13 @@ const API_URL = 'http://localhost:3001';
 
 export const createCharacter = async (characterData) => {
   try {
-    const response = await axios.post(`${API_URL}/characters`, characterData);
+    console.log(characterData);
+    // await axios.post(`${API_URL}/characters`, characterData);
+    const response = await axios.post(
+      `${API_URL}/aws/createChar`,
+      characterData
+    );
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error('Error creating character:', error);
@@ -15,9 +21,7 @@ export const createCharacter = async (characterData) => {
 
 export const startNewGame = async (characterData) => {
   try {
-    const response = await axios.post(`${API_URL}/game/startgame`, {
-      characterData,
-    });
+    const response = await axios.post(`${API_URL}/aws/prompt/1`);
     return response.data;
   } catch (error) {
     console.error('Error starting new game:', error);
