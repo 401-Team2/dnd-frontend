@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ImageBackground, FlatList, StyleSheet } from 'react-native';
-// import api from '../api/Api';
+import {
+  View,
+  Text,
+  ImageBackground,
+  FlatList,
+  StyleSheet,
+} from 'react-native';
+import api from '../api/Api';
 import CharacterCard from '../components/CharacterCard';
 import bgImg from '../../assets/bgImg.jpeg';
 
@@ -11,7 +17,7 @@ const LoadGameScreen = ({ navigation }) => {
     name: 'Aragorn',
     race: 'Human',
     class: 'Ranger',
-    age: 87
+    age: 87,
   };
 
   const [characters, setCharacters] = useState([mockCharacter]);
@@ -36,10 +42,14 @@ const LoadGameScreen = ({ navigation }) => {
   };
 
   return (
-    
-    <ImageBackground 
+    <ImageBackground
       source={bgImg}
-      style={{flex: 1, justifyContent: 'center', alignItems: 'center', opacity: 0.9}}
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        opacity: 0.9,
+      }}
     >
       <Text style={styles.title}>Load Game</Text>
       <FlatList
@@ -47,10 +57,10 @@ const LoadGameScreen = ({ navigation }) => {
         data={characters}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <CharacterCard 
-          style={styles.characterCard}
-            character={item} 
-            onSelect={() => handleCharacterSelect(item)} 
+          <CharacterCard
+            style={styles.characterCard}
+            character={item}
+            onSelect={() => handleCharacterSelect(item)}
           />
         )}
       />

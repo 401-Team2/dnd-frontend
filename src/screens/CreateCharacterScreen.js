@@ -15,7 +15,9 @@ import bgImg from '../../assets/bgImg.jpeg';
 import axios from 'axios';
 
 
-const createCharacterURL = 'https://tjmp838d98.execute-api.us-west-2.amazonaws.com/WorkingPOST';
+
+const createCharacterURL =
+  'https://tjmp838d98.execute-api.us-west-2.amazonaws.com/WorkingPOST';
 
 // api.createCharacter(characterData);
 
@@ -26,7 +28,7 @@ const CreateCharacterScreen = ({ navigation }) => {
   const [race, setRace] = useState('Human');
   const [characterClass, setCharacterClass] = useState('Barbarian');
   const [ID, setID] = useState('');
-  
+
   const ageLimits = {
     Human: 100,
     Elf: 750,
@@ -65,10 +67,10 @@ const CreateCharacterScreen = ({ navigation }) => {
   const classes = ['Barbarian', 'Mage', 'Archmage', 'Warrior', 'Archer'];
 
     const handleCreateCharacter = async () => {
-      // if (!name.trim() || !age) {
-      //   alert("Please fill in all character details.");
-      //   return;
-      // }
+      if (!name.trim() || !age) {
+        alert("Please fill in all character details.");
+        return;
+      }
     
       // const characterId = uuidv4();
     
@@ -94,7 +96,7 @@ const CreateCharacterScreen = ({ navigation }) => {
     // };
 
     try {
-      await api.createCharacter(newCharacter);
+      await api.createCharacters(newCharacter);
     } catch (error) {
       console.error('Error creating character:', error);
       alert('Failed to create character');
@@ -107,7 +109,7 @@ const CreateCharacterScreen = ({ navigation }) => {
     });
   };
 
-  const handlePrompt =  async() => {
+  const handlePrompt = async () => {
     const characterId = Date.now();
 
     axios.post(createCharacterURL, {
@@ -118,7 +120,9 @@ const CreateCharacterScreen = ({ navigation }) => {
       age: age,
     });
 
-    const prompt = await axios.post(createCharacterURL + `/user/${characterId}`)
+    const prompt = await axios.post(
+      createCharacterURL + `/user/${characterId}`
+    );
   };
 
   return (
@@ -243,7 +247,7 @@ const pickerSelectStyles = StyleSheet.create({
     paddingHorizontal: 15,
     fontSize: 16,
     backgroundColor: '#000',
-    color : 'gold',
+    color: 'gold',
   },
 });
 
