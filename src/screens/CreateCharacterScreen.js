@@ -11,7 +11,9 @@ import {
 import RNPickerSelect from 'react-native-picker-select';
 import { createCharacter } from '../api/Api';
 import bgImg from '../../assets/bgImg.jpeg';
+import axios from 'axios';
 
+const createCharacterURL = 'https://tjmp838d98.execute-api.us-west-2.amazonaws.com/WorkingPOST';
 
 // api.createCharacter(characterData);
 
@@ -103,6 +105,20 @@ const CreateCharacterScreen = ({ navigation }) => {
     });
   };
 
+  const handlePrompt =  async() => {
+    const characterId = Date.now();
+
+    axios.post(createCharacterURL, {
+      name: name,
+      id: characterId,
+      class: characterClass,
+      race: race,
+      age: age,
+    });
+
+    const prompt = await axios.post(createCharacterURL + `/user/${characterId}`)
+  };
+
   return (
     <ImageBackground
       source={bgImg}
@@ -118,24 +134,6 @@ const CreateCharacterScreen = ({ navigation }) => {
         placeholder="Enter Name"
         value={name}
         onChangeText={setName}
-      />
-
-      <RNPickerSelect
-        style={pickerSelectStyles}
-        placeholder={{ label: 'Enter ID', value: '' }}
-        onValueChange={(itemValue) => setID(itemValue)}
-        items={[
-          { label: '1', value: '1' },
-          { label: '2', value: '2' },
-          { label: '3', value: '3' },
-          { label: '4', value: '4' },
-          { label: '5', value: '5' },
-          { label: '6', value: '6' },
-          { label: '7', value: '7' },
-          { label: '8', value: '8' },
-          { label: '9', value: '9' },
-          { label: '10', value: '10' },
-        ]}
       />
 
       <RNPickerSelect
