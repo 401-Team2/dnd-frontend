@@ -1,36 +1,44 @@
 import React from 'react';
-import { View, ImageBackground, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  View,
+  ImageBackground,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import StartImg from '../../assets/StartImg2.png';
 import bgImg from '../../assets/bgImg.jpeg';
 
 const StartGameScreen = ({ navigation }) => {
-    const handleStartNewGame = () => {
-    //   navigation.navigate('QuestForge', { newGame: true });
+  const handleStartNewGame = () => {
     navigation.navigate('CreateCharacter');
-    };
-  
-    const handleLoadGame = () => {
-      navigation.navigate('LoadGame');
-    };
-  
-    return (
-      <ImageBackground 
+  };
+
+  const handleLoadGame = () => {
+    navigation.navigate('LoadGame');
+  };
+
+  return (
+    <ImageBackground
       source={bgImg}
-      style={{flex: 1, justifyContent: 'center', alignItems: 'center', opacity: 0.9}}
-      >
-        <Text style={styles.title}>Start a New Game</Text>
-        <Image
-          style={styles.startimg}
-          source={StartImg}
-        />
-        <TouchableOpacity style={styles.button} onPress={handleStartNewGame} >
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        opacity: 0.9,
+      }}
+    >
+      <Text style={styles.title}>Start a New Game</Text>
+      <Image style={styles.startimg} source={StartImg} />
+      <TouchableOpacity style={styles.button} onPress={handleStartNewGame}>
         <Text style={styles.buttonText}>Create New Character</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={handleLoadGame} >
+      <TouchableOpacity style={styles.button} onPress={handleLoadGame}>
         <Text style={styles.buttonText}>Load Existing Character</Text>
       </TouchableOpacity>
-      </ImageBackground>
-    );
+    </ImageBackground>
+  );
 };
 
 const styles = StyleSheet.create({

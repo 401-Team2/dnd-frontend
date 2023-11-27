@@ -11,7 +11,6 @@ import CharacterCard from '../components/CharacterCard';
 import bgImg from '../../assets/bgImg.jpeg';
 
 const LoadGameScreen = ({ navigation }) => {
-  // Initial mock character for demonstration
   const mockCharacter = {
     id: 1,
     name: 'Aragorn',
@@ -25,17 +24,6 @@ const LoadGameScreen = ({ navigation }) => {
   useEffect(() => {
     fetchCharacters();
   }, []);
-
-  // const fetchCharacters = async () => {
-  //   try {
-  //     // Fetch characters from the API
-  //     const charactersData = await api.fetchCharacters();
-  //     // Combine API data with the mock character
-  //     setCharacters([mockCharacter, ...charactersData]);
-  //   } catch (error) {
-  //     console.error('Error fetching characters:', error);
-  //   }
-  // };
 
   const handleCharacterSelect = (character) => {
     navigation.navigate('QuestForge', { character: character });
@@ -69,12 +57,6 @@ const LoadGameScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  // container: {
-  //   flex: 1,
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //   // backgroundColor: '#000',
-  // },
   title: {
     fontSize: 24,
     marginTop: 20,
@@ -84,14 +66,10 @@ const styles = StyleSheet.create({
   list: {
     flex: 1,
     width: '100%',
-    // alignItems: 'left',
-    // justifyContent: 'left',
-    // backgroundColor: '#000',
     marginRight: 10,
   },
   characterCard: {
     alignItems: 'left',
-    // justifyContent: 'left',
     backgroundColor: '#000',
   },
 });

@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-// import { Picker } from '@react-native-picker/picker';
 import RNPickerSelect from 'react-native-picker-select';
 import { createCharacter } from '../api/Api';
 import bgImg from '../../assets/bgImg.jpeg';
@@ -15,8 +14,6 @@ import axios from 'axios';
 
 const createCharacterURL =
   'https://tjmp838d98.execute-api.us-west-2.amazonaws.com/WorkingPOST';
-
-// api.createCharacter(characterData);
 
 const CreateCharacterScreen = ({ navigation }) => {
   const [name, setName] = useState('');
@@ -69,8 +66,6 @@ const CreateCharacterScreen = ({ navigation }) => {
       return;
     }
 
-    // const characterId = uuidv4();
-
     const newCharacter = {
       id: 1,
       name: name,
@@ -79,18 +74,6 @@ const CreateCharacterScreen = ({ navigation }) => {
       class: characterClass,
       gender: gender,
     };
-
-    // createCharacter(characterData);
-
-    //   try {
-    //     await createCharacter(newCharacter);
-    //     navigation.navigate('QuestForge', { newGame: true, character: newCharacter });
-    //   } catch (error) {
-    //     console.error('Error creating character:', error);
-    //     alert('Failed to create character');
-    //     return;
-    //   }
-    // };
 
     try {
       await createCharacter(newCharacter);

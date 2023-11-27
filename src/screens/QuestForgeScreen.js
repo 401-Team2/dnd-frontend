@@ -14,14 +14,11 @@ const QuestForgeScreen = ({ route }) => {
   useEffect(() => {
     const fetchDataAndDisplay = async () => {
       try {
-        // Make a POST request using Axios
         const response = await axios.post(`${API_URL}/aws/prompt/1`);
         console.log("HERE'S THE RESPONSE ", response.data);
 
-        // Populate the form with the initial response
         populateFormWithData(response.data);
 
-        // Set scene and options state
         setScene(response.data.scene);
         setOptions(response.data.options);
       } catch (error) {
@@ -50,7 +47,6 @@ const QuestForgeScreen = ({ route }) => {
 
         const generatedStory = response.data.story;
 
-        // Populate the form with the generated story
         populateFormWithData(generatedStory);
       } catch (error) {
         console.error('Error submitting user choice:', error);
